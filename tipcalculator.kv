@@ -1,0 +1,127 @@
+TipCalcBoxLayout:
+
+<TipCalcBoxLayout>:
+    spacing: "10dp"
+    canvas.before:
+        Color:
+            rgba: .5294, .8078, .9216, 1
+        Rectangle:
+            pos: self.pos
+            size: self.size
+    id: tip_calculator
+    orientation: "vertical"
+    BoxLayout:
+        size_hint: 1, .5
+        FloatInput:
+            id: bill_total
+            size_hint: .3, 1
+            hint_text: "Bill Total"
+            on_text: tip_calculator.calculateSplitTip()
+            on_text: tip_calculator.calculateTip()
+            font_size: dp(14)
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 0, .2275, .4353, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            markup: True
+            text: "[b]Bill Total[/b] $" + bill_total.text
+            size_hint: .7, 1
+            color: 1, .7725, .4235, 1
+            font_size: dp(14)
+    BoxLayout:
+        Label: 
+            canvas.before:
+                Color:
+                    rgba: 1, .7725, .4235, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text: "Tip %"
+            size_hint: .3, .4
+            pos_hint: {"center_y": .5}
+            color: 0, .2275, .4353, 1
+            font_size: dp(16)
+        Slider:
+            id: tip_slider
+            max: 30
+            step: 1
+            value: 15
+            on_touch_move: tip_calculator.calculateSplitTip()
+            on_touch_move: tip_calculator.calculateTip()
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 1, .7725, .4235, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text: str(tip_slider.value) + "%"
+            size_hint: .25, .4
+            pos_hint: {"center_y": .5}
+            color: 0, .2275, .4353, 1
+            font_size: dp(16)
+    BoxLayout:
+        Label: 
+            canvas.before:
+                Color:
+                    rgba: 1, .7725, .4235, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text: "Split"
+            size_hint: .3, .4
+            pos_hint: {"center_y": .5}
+            color: 0, .2275, .4353, 1
+            font_size: dp(16)
+        Slider:
+            id: split_slider
+            max: 20
+            min: 1
+            step: 1
+            value: 1
+            on_touch_move: tip_calculator.calculateSplitTip()
+            on_touch_move: tip_calculator.calculateTip()
+        Label:
+            canvas.before:
+                Color:
+                    rgba: 1, .7725, .4235, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            text: str(split_slider.value)
+            size_hint: .25, .4
+            pos_hint: {"center_y": .5}
+            color: 0, .2275, .4353, 1
+            font_size: dp(16)
+    Label:
+        canvas.before:
+            Color:
+                rgba: 1, .7725, .4235, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        id: tip_amount
+        font_size: 24
+        text: "Tip: $0.0"
+        size_hint: .9, .5
+        pos_hint: {"center_x": 0.5}
+        color: 0, .2275, .4353, 1
+        font_size: dp(24)
+    Label:
+        canvas.before:
+            Color:
+                rgba: 1, .7725, .4235, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+        id: split_tip_amount
+        font_size: 24
+        text: "Split Tip: $0.0"
+        size_hint: .9, .5
+        pos_hint: {"center_x": 0.5}
+        color: 0, .2275, .4353, 1
+        font_size: dp(24)
+        
